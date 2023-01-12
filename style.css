@@ -1,0 +1,43 @@
+body {    
+    background:url(785883.jpg) no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    
+}
+.headbar {
+
+    padding: 10px;
+    background-color: #1d0e0e;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.date{
+    margin-left: 40%;
+    color: white;
+    display: inline;
+    cursor: pointer;
+}
+.date :hover{
+    background-color: rgb(48, 41, 41);
+}
+.applications{
+    float: left;
+    display: inline;
+}
+.controls{
+    padding-right: 20px;
+    float: right;
+    display: inline;
+    position:relative;
+}
+#snake{
+    bottom: 0%;
+    position: fixed;
+}
+#desktop{
+    height: 100%;
+    width: 100%;
+}
