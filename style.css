@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Athiti&display=swap');
+
 body {    
     background:url(785883.jpg) no-repeat center center fixed;
     background-size: cover;
     overflow: hidden;
+    position: fixed; 
     margin: 0;
-    display: flex;
+    left: 0;   
+    right: 0;
+    top: 0;
+    bottom: 0;
     
 }
 .headbar {
@@ -11,14 +17,14 @@ body {
     padding: 10px;
     background-color: #1d0e0e;
     color: white;
-    overflow: hidden;
-    white-space: nowrap;
+    font-family: Ubuntu;
 }
 .date{
     margin-left: 40%;
     color: white;
     display: inline;
     cursor: pointer;
+    font-weight:bold;
 }
 .date :hover{
     background-color: rgb(48, 41, 41);
@@ -40,4 +46,28 @@ body {
 #desktop{
     height: 100%;
     width: 100%;
+}
+#controls{
+    cursor: pointer;
+}
+.bottom-bar{
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    background-color: rgb(41, 41, 31);
+    border-radius: 10px;
+    transform: translate(-50%, 0%);
+    
+}
+.bottom-bar * {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: transform .2s;
+    height: 30px;
+    width: 30px;
+}
+.bottom-bar *:hover {
+    transform: scale(1.5);
 }
