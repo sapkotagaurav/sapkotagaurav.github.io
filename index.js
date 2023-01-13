@@ -11,7 +11,6 @@ let gettimeanddate = () =>{
 
 gettimeanddate()
 let isShowncalendar = false;
-let snakeicon = document.querySelector('#snake')
 let date = document.querySelector("#date")
 let controls = document.querySelector('#controls')
 let calendar;
@@ -89,7 +88,6 @@ function showInfo() {
     });
     
 }
-snakeicon.onclick= ()=>{snake()}
 controls.onclick=()=>showInfo()
 date.onclick =()=>{showCalendar()}
 
