@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div id="desktop">
+    <div id="desktop" >
         <div class="headbar">
             <div class="applications">
                 <span><b>Applications</b></span>
@@ -38,11 +38,12 @@
         <div class="bottom-bar">
             <img src="assets/images/launcher-icon.png" alt="launcher" style="filter:invert(100%)">
             <img src="assets/images/chrome.png" alt="chrome">
-            <img src="assets/images/vscode.png" alt="vscode">
+            <img src="assets/images/vscode.png" id="code" alt="vscode">
             <img src="assets/images/terminal.png" alt="terminal">
             <img src="assets/images/camera.ico" alt="camera">
 
         </div>
+        
         
     </div>
 
@@ -68,7 +69,7 @@
     
     
             </div>
-            <div class="info">
+            <div class="information">
                 <p><span>Operating System:</span> &nbsp; <span id="os"></span></p>
                 <p><span>Browser:</span>&nbsp;<span id="browser"></span></p>
                 <hr>
@@ -92,12 +93,14 @@
         <img src="#" alt="No Image" id="ss-img">
         <button id="save-ss" >Save</button>
     </div> -->
+    
 
     
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script src="assets/js/domtoimage.js"></script>
+<script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <script src="index.js"></script>
 
 </html>

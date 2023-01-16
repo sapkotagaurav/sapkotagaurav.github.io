@@ -29,7 +29,10 @@ function getScreenshot() {
     button.innerHTML="Save"
     div.append(img)
     div.append(button)
-    html2canvas(document.body).then(function (canvas) {
+    html2canvas(document.body,{        allowTaint : true,
+        logging: true,
+        profile: true,
+        useCORS: true}).then(function (canvas) {
         canvas.toBlob((blob) => {
             var filename=`Screenshot_${new Date().toUTCString()}.png`
 
@@ -108,16 +111,22 @@ function showAlert(title, msg, timed, callback) {
 }
 
 function showCalendar() {
+    if(isShowncalendar){
+        calendar.close()
+        calendar=null;
+        isShowncalendar=false;
+    }else{
     calendar = new WinBox("Calendar", {
-        url: "https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%233F51B5&ctz=America%2FChicago&src=Z2F1cmF2c2Fwa290YTkwNkBnbWFpbC5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4ubnAjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%237986CB&color=%23009688",
+        class:"no-full no-header no-resize",
+        html:'<div class="elfsight-app-b79cc259-62ad-46bf-85ba-e9cb8a751c25">Loading...</div>',
         height: 650,
         width: 650,
-        modal: true,
-        x: '50%',
-        y: '0'
+        x: 605,
+        y: 36
 
-    })
+    }).removeControl('wb-max').removeControl('wb-min')
     isShowncalendar = true;
+}
 
 }
 
@@ -134,24 +143,47 @@ function snake() {
 }
 
 
+function VScode(){
+    var html='loading';
+    fetch('https://github1s.com/sapkotagaurav/snake').then((res)=>{
+        res.text().then((d)=>{
+html=d;
+html = html.replaceAll('/static','https://github1s.com/static').replaceAll("/manifest.json","https://github1s.com/manifest.json")
+console.log(html)
+new WinBox("VS CODE",{
+    //html:html
+    url:"https://github1s.com/sapkotagaurav/snake"
+})
+        })
+        
+    })
+    
+}
+document.getElementById('code').onclick =()=>VScode()
+
 
 function showInfo() {
+    if(infoBox){
+        infoBox.close()
+        infoBox=null
+    }else{
     infoBox = new WinBox("Info", {
+        class:"no-full no-header no-resize",
         mount: document.getElementById('info'),
-        height: 650,
-        width: 650,
-        modal: true,
-        x: '65%',
-        y: '0%',
+        width:500,
+        x: '75%',
+        y: 36,
+        onclose:function(){infoBox=null}
 
 
 
 
     });
-
+    }
 }
 controls.onclick = () => showInfo()
 date.onclick = () => { showCalendar() }
+
 
 
 
@@ -168,7 +200,7 @@ fetch(url).then((data) => {
         document.getElementById('ip').innerHTML = res['ip']
         document.getElementById('location').innerHTML = `${res['city']}, ${res['region']}, ${res['postal']}`
         document.getElementById('wifi').innerHTML = navigator.onLine ? "Connected" : "Disconnected"
-        document.getElementById('os').innerHTML = navigator.oscpu
+        document.getElementById('os').innerHTML = navigator.platform
         document.getElementById('browser').innerHTML = navigator.appCodeName
 
     })

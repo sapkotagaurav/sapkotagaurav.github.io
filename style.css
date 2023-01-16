@@ -10,6 +10,16 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+ 
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
     
 }
 .headbar {
@@ -87,4 +97,11 @@ body {
 }
 #screenshot{
     margin-left: 20px;
+}
+#info  {
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border:  2px;
+    border-radius: 2px;
 }
