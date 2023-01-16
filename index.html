@@ -6,63 +6,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css"
+        integrity="sha512-FA9cIbtlP61W0PRtX36P6CGRy0vZs0C2Uw26Q1cMmj3xwhftftymr0sj8/YeezDnRwL9wtWw8ZwtCiTDXlXGjQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://rawcdn.githack.com/nextapps-de/winbox/0.2.6/dist/winbox.bundle.min.js"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" crossorigin="anonymous"/>
     <title>Gaurav Sapkota</title>
 </head>
 
 <body>
     <div id="desktop">
-    <div class="headbar">
-        <div class="applications">
-            <span><b>Applications</b></span>
-        </div>
-        <div class="date">
-            <span id="date"></span>
-            <span id="time"></span>
-        </div>
-        <div class="controls" id="controls">
-            <span class="fa fa-wifi"></span>
-            <span class="fa-brands fa-bluetooth"></span>
-            <span class="fa fa-power-off"></span>
-        </div>
+        <div class="headbar">
+            <div class="applications">
+                <span><b>Applications</b></span>
+            </div>
+            <div class="date">
+                <span id="date"></span>
+                <span id="time"></span>
+            </div>
+            <div class="controls" id="controls">
+                <span class="fa fa-wifi"></span>
+                <span class="fa-brands fa-bluetooth"></span>
+                <span class="fa fa-power-off"></span>
+            </div>
 
 
-    </div>
-    <br>
-
-    <div class="bottom-bar">
-        <img src="assets/images/launcher-icon.png" alt="launcher" style="filter:invert(100%)">
-        <img src="assets/images/chrome.png" alt="chrome" >
-        <img src="assets/images/vscode.png" alt="vscode" >
-        <img src="assets/images/terminal.png" alt="terminal" >
-        <img src="assets/images/camera.ico" alt="camera" >
+        </div>
         
-    </div> 
-</div>
 
-<div id="info">
-    <div class="info">
-    <div class="info">
-        <p><span>Operating System:</span> &nbsp; <span id="os"></span></p>
-    <p><span>Browser:</span>&nbsp;<span id="browser"></span></p>
-    <hr>
-    <p><i class="fa-solid fa-wifi"></i> :&nbsp; <span id="wifi"></span></p>
-    <p><span>IP:</span> &nbsp; <span id="ip"></span></p>
-    <p><span>Location:</span>&nbsp;<span id="location"></span></p>
+        <div class="bottom-bar">
+            <img src="assets/images/launcher-icon.png" alt="launcher" style="filter:invert(100%)">
+            <img src="assets/images/chrome.png" alt="chrome">
+            <img src="assets/images/vscode.png" alt="vscode">
+            <img src="assets/images/terminal.png" alt="terminal">
+            <img src="assets/images/camera.ico" alt="camera">
+
+        </div>
+        
     </div>
+
+    <div class="screenshot" id="screenshot">
+
+
+
+    </div>
+    <div id="info">
+        <div class="control-center">
+            <div class="control-icons">
+                <div class="control-icons">
     
-</div>
-<hr>
-<div class="power">
-<button id="turn-off"><i class="fa-solid fa-2x fa-power-off">Turn Off</i> </button>
-<button id="reboot"><i class="fa-sharp fa-2x fa-solid fa-rotate-right"> Reboot</i> </button>
+                    <button class="control-button" title="Battery Status"><span class="material-symbols-rounded"
+                            id="battery-icon">
+                            battery_6_bar
+                        </span><span id="battery-text"></span></button>
+                    <button class="control-button" title="Screenshot"><span class="material-symbols-rounded"
+                            id="screenshot-icon">
+                            photo_camera
+                        </span></button>
+                </div>
     
-</div>
+    
+            </div>
+            <div class="info">
+                <p><span>Operating System:</span> &nbsp; <span id="os"></span></p>
+                <p><span>Browser:</span>&nbsp;<span id="browser"></span></p>
+                <hr>
+                <p><i class="fa-solid fa-wifi"></i> :&nbsp; <span id="wifi"></span></p>
+                <p><span>IP:</span> &nbsp; <span id="ip"></span></p>
+                <p><span>Location:</span>&nbsp;<span id="location"></span></p>
+            </div>
+
+        </div>
+        <hr>
+        <div class="power">
+            <button id="turn-off"><i class="fa-solid fa-2x fa-power-off">Turn Off</i> </button>
+            <button id="reboot"><i class="fa-sharp fa-2x fa-solid fa-rotate-right"> Reboot</i> </button>
+
+        </div>
+
+
+    </div>
+
+    <!-- <div class="screenshot" id="screenshot">
+        <img src="#" alt="No Image" id="ss-img">
+        <button id="save-ss" >Save</button>
+    </div> -->
 
     
-</div>
 </body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script src="assets/js/domtoimage.js"></script>
 <script src="index.js"></script>
+
 </html>

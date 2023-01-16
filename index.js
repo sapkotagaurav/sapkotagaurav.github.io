@@ -1,26 +1,88 @@
-let gettimeanddate = () =>{
+
+
+/*Get and set the battery level */
+function getBatteryLevel() {
+    navigator.getBattery().then((r) => {
+        document.querySelector('#battery-icon').innerHTML = r.charging ? `battery_charging_50` : `battery_${r.level * 6 | 0}_bar`
+        document.querySelector('#battery-text').innerHTML = `${r.level * 100 | 0}%`
+    }).catch((e) => {
+
+    })
+
+}
+
+var infoBox;
+
+document.querySelector('#screenshot-icon').onclick = getScreenshot
+function getScreenshot() {
+    // domtoimage.toJpeg(document.getElementById('desktop'),{quality:0.9}).then((res)=>{
+    //     console.log(res)
+    // })
+    if (infoBox) { infoBox.close() }
+    var div = document.createElement('div')
+    div.id ='screenshot'
+    var img = document.createElement('img')
+    img.src='#'
+    img.height=screen.height/2
+    img.width=screen.width/2
+    var button = document.createElement('button')
+    button.innerHTML="Save"
+    div.append(img)
+    div.append(button)
+    html2canvas(document.body).then(function (canvas) {
+        canvas.toBlob((blob) => {
+            var filename=`Screenshot_${new Date().toUTCString()}.png`
+
+            img.src=URL.createObjectURL(blob)
+            button.onclick= function (){saveAs(blob,filename)}
+            
+            new WinBox(filename,{
+                mount:div,
+                height:screen.height/2+50,
+                width:screen.width/2+50
+
+            })
+            
+
+
+            //saveAs(blob,'s.png')
+
+        })
+    });
+}
+
+
+
+let gettimeanddate = () => {
     let currTime = new Date()
-    document.querySelector("#date").innerText = currTime.toLocaleDateString("en-us",{month:'short',day:"2-digit"})
-    
-    document.querySelector('#time').innerText = currTime.toLocaleTimeString([],{hour:"numeric",minute:"numeric"})
-    if(document.querySelector("#date")){
-    setTimeout(gettimeanddate,1000);
+    document.querySelector("#date").innerText = currTime.toLocaleDateString("en-us", { month: 'short', day: "2-digit" })
+
+    document.querySelector('#time').innerText = currTime.toLocaleTimeString([], { hour: "numeric", minute: "numeric" })
+
+    if (navigator && 'getBattery' in navigator) {
+        getBatteryLevel()
+    }
+    if (document.querySelector("#date")) {
+        setTimeout(gettimeanddate, 1000);
     }
 
 }
 
+
 gettimeanddate()
+
+
 let isShowncalendar = false;
 let date = document.querySelector("#date")
 let controls = document.querySelector('#controls')
 let calendar;
 
-function showAlert(title,msg,timed,callback){
-    var a=5;
-    var m =`<p> ${msg} in <span id="display">06</span> Seconds.</p>`
-    const wb = new WinBox(title,{
-        html:m,
-        modal:true
+function showAlert(title, msg, timed, callback) {
+    var a = 5;
+    var m = `<p> ${msg} in <span id="display">06</span> Seconds.</p>`
+    const wb = new WinBox(title, {
+        html: m,
+        modal: true
 
     })
     wb.removeControl("wb-close")
@@ -30,66 +92,66 @@ function showAlert(title,msg,timed,callback){
         seconds = parseInt(timer % 60, 10);
 
         seconds = seconds < 10 ? "0" + seconds : seconds;
-        if(document.getElementById('display')){
+        if (document.getElementById('display')) {
 
-        document.getElementById('display').textContent =  seconds ;
+            document.getElementById('display').textContent = seconds;
         }
         if (--timer < 0) {
             callback()
-            
+
         }
     }, 1000);
-    
-    
-    
+
+
+
 
 }
 
-function showCalendar(){
-    calendar= new WinBox("Calendar",{
-        url:"https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%233F51B5&ctz=America%2FChicago&src=Z2F1cmF2c2Fwa290YTkwNkBnbWFpbC5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4ubnAjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%237986CB&color=%23009688",
-        height:650,
-        width:650,
-        modal:true, 
-        x:'50%',
-        y:'0'
-        
+function showCalendar() {
+    calendar = new WinBox("Calendar", {
+        url: "https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%233F51B5&ctz=America%2FChicago&src=Z2F1cmF2c2Fwa290YTkwNkBnbWFpbC5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4ubnAjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%237986CB&color=%23009688",
+        height: 650,
+        width: 650,
+        modal: true,
+        x: '50%',
+        y: '0'
+
     })
-    isShowncalendar=true;
-    
+    isShowncalendar = true;
+
 }
 
 function snake() {
-    new WinBox("snake",{
-        url:"http://gaurabsapkota.com.np/snake/",
-        height:650,
-        width:650,
-        scroll:true,
-        
+    new WinBox("snake", {
+        url: "http://gaurabsapkota.com.np/snake/",
+        height: 650,
+        width: 650,
+        scroll: true,
+
 
     });
-    
+
 }
 
 
-var infoBox;
+
 function showInfo() {
-   infoBox= new WinBox("Info",{
-        mount:document.getElementById('info'),
-        height:650,
-        width:650,
-        modal:true,
-        x:'65%',
-        y:'0%',
-        
-        
-        
+    infoBox = new WinBox("Info", {
+        mount: document.getElementById('info'),
+        height: 650,
+        width: 650,
+        modal: true,
+        x: '65%',
+        y: '0%',
+
+
+
 
     });
-    
+
 }
-controls.onclick=()=>showInfo()
-date.onclick =()=>{showCalendar()}
+controls.onclick = () => showInfo()
+date.onclick = () => { showCalendar() }
 
 
 
@@ -100,31 +162,31 @@ date.onclick =()=>{showCalendar()}
 
 
 //**************************************info*****************/
-let url ="https://ipapi.co/json/"
-fetch(url).then((data)=>{
-    data.json().then((res)=>{
-document.getElementById('ip').innerHTML=res['ip']
-document.getElementById('location').innerHTML=`${res['city']}, ${res['region']}, ${res['postal']}`
-document.getElementById('wifi').innerHTML=navigator.onLine?"Connected":"Disconnected"
-document.getElementById('os').innerHTML=navigator.oscpu
-document.getElementById('browser').innerHTML=navigator.appCodeName
+let url = "https://ipapi.co/json/"
+fetch(url).then((data) => {
+    data.json().then((res) => {
+        document.getElementById('ip').innerHTML = res['ip']
+        document.getElementById('location').innerHTML = `${res['city']}, ${res['region']}, ${res['postal']}`
+        document.getElementById('wifi').innerHTML = navigator.onLine ? "Connected" : "Disconnected"
+        document.getElementById('os').innerHTML = navigator.oscpu
+        document.getElementById('browser').innerHTML = navigator.appCodeName
 
     })
 })
 function turnoff() {
-    document.body.innerHTML=`<button style="top:50%; left:50%; position:absolute;" onclick="location.reload()"><i class="fa-solid fa-2x fa-power-off">Turn On</i></button>`
-    document.body.style.background="black"
+    document.body.innerHTML = `<button style="top:50%; left:50%; position:absolute;" onclick="location.reload()"><i class="fa-solid fa-2x fa-power-off">Turn On</i></button>`
+    document.body.style.background = "black"
 }
-function restart(){
+function restart() {
     location.reload();
 }
-document.getElementById('turn-off').onclick=(()=>{
-    showAlert("Shutting Down","Shutting Down",5,turnoff)
+document.getElementById('turn-off').onclick = (() => {
+    showAlert("Shutting Down", "Shutting Down", 5, turnoff)
     infoBox.close();
 
 })
-document.getElementById('reboot').onclick=(()=>{
-    showAlert("Rebooting","Rebooting",5,restart)
+document.getElementById('reboot').onclick = (() => {
+    showAlert("Rebooting", "Rebooting", 5, restart)
     infoBox.close()
 
 })
