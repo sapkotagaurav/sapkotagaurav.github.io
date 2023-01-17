@@ -8,6 +8,7 @@ body {
     margin: 0;
     left: 0;   
     right: 0;
+    height: 100vh;
     top: 0;
     bottom: 0;
     -moz-user-select: -moz-none;
@@ -104,4 +105,39 @@ body {
     margin-right: 20px;
     border:  2px;
     border-radius: 2px;
+}
+#userin{
+    border: none;
+    background:none;
+    color: azure;
+}
+#userin:focus{
+    border: none;
+    outline: none;
+    caret-color: black;
+    background: none;
+    color: azure;
+    
+}
+#userin-old{
+    border: none;
+    outline: none;
+    background: none;
+    color: azure;
+}
+.terminal{
+    font-family: monospace;
+    align-items: stretch;
+    color: azure;
+}
+#prompt{
+    color: #4D9608;
+    text-decoration: solid;
+    
+}
+.terminal .wb-body{
+    background-color: #333333;
+}
+.wb-title{
+    justify-self: center;
 }

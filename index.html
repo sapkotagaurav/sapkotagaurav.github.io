@@ -39,7 +39,7 @@
             <img src="assets/images/launcher-icon.png" alt="launcher" style="filter:invert(100%)">
             <img src="assets/images/chrome.png" alt="chrome">
             <img src="assets/images/vscode.png" id="code" alt="vscode">
-            <img src="assets/images/terminal.png" alt="terminal">
+            <img src="assets/images/terminal.png" id="terminal" alt="terminal">
             <img src="assets/images/camera.ico" alt="camera">
 
         </div>
@@ -89,10 +89,15 @@
 
     </div>
 
-    <!-- <div class="screenshot" id="screenshot">
-        <img src="#" alt="No Image" id="ss-img">
-        <button id="save-ss" >Save</button>
-    </div> -->
+    <div class="term">
+        <div id="prompt-div" class="prompt-div"></div>
+
+    </div>
+
+    <div class="camera-image">
+        <img id="img">
+
+    </div>
     
 
     
@@ -102,5 +107,6 @@
 <script src="assets/js/domtoimage.js"></script>
 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
 <script src="index.js"></script>
+<script src="./assets/js/terminal.js"></script>
 
 </html>
