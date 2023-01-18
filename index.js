@@ -163,7 +163,7 @@ let download= document.getElementById('download-a')
 function showCamera(){
 navigator.mediaDevices.getUserMedia({audio:false,video:true}).then((s)=>{
     new WinBox("Camera",{
-        mount : document.getElementById('camera-image').cloneNode(true),
+        mount : document.getElementById('camera-image'),
         onclose:()=>{
             stream.getTracks().forEach(track => track.stop())
         }
