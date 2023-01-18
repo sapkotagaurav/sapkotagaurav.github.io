@@ -19,7 +19,9 @@
     <div id="desktop" >
         <div class="headbar">
             <div class="applications">
-                <span><b>Applications</b></span>
+                <span><b>G-OS</b></span>
+                &nbsp;
+                <span id="help-icon">HELP</span>
             </div>
             <div class="date">
                 <span id="date"></span>
@@ -36,11 +38,13 @@
         
 
         <div class="bottom-bar">
-            <img src="assets/images/launcher-icon.png" alt="launcher" style="filter:invert(100%)">
-            <img src="assets/images/chrome.png" alt="chrome">
             <img src="assets/images/vscode.png" id="code" alt="vscode">
+            
             <img src="assets/images/terminal.png" id="terminal" alt="terminal">
-            <img src="assets/images/camera.ico" alt="camera">
+            <img src="assets/images/camera.ico" alt="camera" id="camera-icon">
+            <img src="assets/images/resume.png" alt="resume" id="resume-icon">
+            <img src="assets/images/blog.png" alt="Blog" id="blog-icon">
+            <img src="assets/images/snake.ico" id="snake" alt="Snake">
 
         </div>
         
@@ -94,8 +98,16 @@
 
     </div>
 
-    <div class="camera-image">
-        <img id="img">
+    <div class="camera-image" id="camera-image">
+        <div>
+
+            <video id="video" height="200" width="200"  autoplay></video>
+            <button id="click-photo">Click Photo</button>
+        </div>
+
+<canvas id="canvas" height="1000" width="1000" ></canvas>
+<a href="#" id="download-a"><button id="download-img" style="display: none;">Save</button></a>
+
 
     </div>
     

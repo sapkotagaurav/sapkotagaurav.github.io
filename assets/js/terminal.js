@@ -23,6 +23,7 @@ const commands = [
   "cd",
   "clear",
   "exit",
+  "help",
 ]; //,"pwd","blog","vs-code","snake","shutdown","reboot",,]
 
 function processEnter() {
@@ -56,7 +57,7 @@ function handleCommand(command, arg) {
 }
 
 function echo(a) {
-  document.getElementById("out").innerHTML = `<p>${a}</p>`;
+  document.getElementById("out").innerHTML = `${a}`;
   document.getElementById("out").setAttribute("id", "out-old");
 }
 
@@ -125,6 +126,11 @@ const com = {
     },
     help: "Exits the terminal",
   },
+  help:{
+    action:()=>{
+      echo(`Commands available ${commands.join(' ')}`)
+    },help:"Displays the help"
+  }
 };
 
 commands.forEach((element) => {

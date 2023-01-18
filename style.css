@@ -114,9 +114,10 @@ body {
 #userin:focus{
     border: none;
     outline: none;
-    caret-color: black;
+    caret-color: azure;
     background: none;
     color: azure;
+    
     
 }
 #userin-old{
@@ -140,4 +141,23 @@ body {
 }
 .wb-title{
     justify-self: center;
+}
+.camera-image{
+    display: inline-block;
+}
+#canvas{
+    height: 200px;
+    width: 200px;
+}
+
+#pdf{
+    height: 100%;
+    width: 100%;
+}
+.pdf{
+    height: 100%;
+    width: 100%;
+}
+#help-icon{
+    cursor: pointer;
 }

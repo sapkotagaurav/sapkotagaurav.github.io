@@ -111,27 +111,69 @@ function showAlert(title, msg, timed, callback) {
 }
 
 
-var stream,imagecapture;
-function showCamera(){
-    if (navigator.mediaDevices) {
-        navigator.mediaDevices.getUserMedia({audio:false,video:true}).then((media)=>{
-            stream=media;
-            let s = media.getVideoTracks();
-            imagecapture = new ImageCapture(s);
-
-
-        })
-        
-    }
+///////blog////////////
+document.getElementById('blog-icon').onclick= function (){
+    new WinBox("Blog",{
+        url:"https://gaurab.codes/blogs/"
+    })
 }
-
-function takePicture(){
-    var img = document.getElementById('img');
-    imagecapture.takePhoto().then((blob)=>{
-        img.src=URL.createObjectURL(blob)
+document.getElementById('resume-icon').onclick = function(){
+    var html =`<div class="pdf">
+    <object id="pdf" data="./assets/images/resume.pdf" type="application/pdf" width="600" height="700">
+        alt : <a href="test.pdf">test.pdf</a>
+    </object>
+</div>`
+    new WinBox("Blog",{
+        html:html
     })
 }
 
+document.getElementById('help-icon').onclick = function(){
+    var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. </div>`
+    new WinBox("Help",{
+        html:html
+    })
+}
+
+
+
+
+
+
+///////////////////////////////Camera////////////////////////
+var stream,image;
+let camera_button = document.querySelector("#camera-icon");
+camera_button.onclick=showCamera
+let video = document.querySelector("#video");
+let click_button = document.querySelector("#click-photo");
+click_button.onclick =takePicture
+let canvas = document.querySelector("#canvas");
+let download= document.getElementById('download-a')
+function showCamera(){
+navigator.mediaDevices.getUserMedia({audio:false,video:true}).then((s)=>{
+    new WinBox("Camera",{
+        mount : document.getElementById('camera-image'),
+        onclose:()=>{
+            stream.getTracks().forEach(track => track.stop())
+        }
+    })
+    stream =s;
+    video.srcObject = stream;
+}
+)
+}
+
+function takePicture(){
+canvas.getContext('2d').drawImage(video,0,0,canvas.height,canvas.width)
+image = canvas.toDataURL('image/jpeg')
+document.getElementById('download-img').style.display='block'
+document.getElementById('download-a').setAttribute('download',`Image_${new Date()}.jpeg`)
+document.getElementById('download-a').setAttribute('href',image)
+
+}
+
+
+/////////////////calendar///////////
 function showCalendar() {
   if (isShowncalendar) {
     calendar.close();
