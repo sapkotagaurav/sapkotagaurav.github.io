@@ -32,27 +32,33 @@ function processEnter() {
   document.querySelector("#userin").setAttribute("id", "userin-old");
   document.querySelector("#userin-old").readOnly = true;
   handleCommand(command[0], command[1]);
-if(command[0]!="exit"){  var div = document.createElement("div");
-  div.classList.add("prompt-div");
-  div.innerHTML = ini;
-  main.appendChild(div);
-  document.querySelector("#userin").focus();}
+  if (command[0] != "exit") {
+    var div = document.createElement("div");
+    div.classList.add("prompt-div");
+    div.innerHTML = ini;
+    main.appendChild(div);
+    document.querySelector("#userin").focus();
+  }
 }
 
 function handleCommand(command, arg) {
-  if (commands.includes(command)) {
-    if (arg) {
-      var a = getArg(arg);
-      if (com[command]["args"][a]) {
-        com[command]["args"][a]();
+  try {
+    if (commands.includes(command)) {
+      if (arg) {
+        var a = getArg(arg);
+        if (com[command]["args"] && com[command]["args"][a]) {
+          com[command]["args"][a]["action"]();
+        } else {
+          echo(`Command ${command} does not support the argument ${arg}`);
+        }
       } else {
-        echo(`Command ${command} does not support the argument ${arg}`);
+        com[command]["action"]();
       }
     } else {
-      com[command]["action"]();
+      echo("Command is not recognized");
     }
-  } else {
-    echo("Command is not recognized");
+  } catch (error) {
+    echo(`Error: ${error}`);
   }
 }
 
@@ -89,30 +95,48 @@ const com = {
     help: "Prints the Manual for commands",
   },
   uname: {
-    args: { a: () => echo("Linux") },
+    args: {
+      a: { action: () => echo("Linux"), help: "Prints the system information" },
+    },
     action: () => echo(navigator.userAgent),
     help: "Prints Uname",
   },
   hostname: { action: () => echo("G-os Linux"), help: "Prints hostname" },
   gaurab: {
-    args: { f: () => echo("Gaurab Sapkota") },
+    args: {
+      f: { action: () => echo("Gaurab Sapkota"), help: "Prints full name" },
+    },
     action: () => echo("That's me"),
     help: "Prints my full name",
   },
   resume: {
     args: {
-      download: () => {
-        echo("Downloading");
-        saveFile("./assets/images/resume.pdf");
+      download: {
+        action: () => {
+          echo("Downloading");
+          saveFile("./assets/images/resume.pdf");
+        },
+        help: "Downloads the resume",
+      },
+      view: {
+        action: () => {
+          echo(`Opened resume`);
+          document.getElementById("resume-icon").click();
+        },
+        help: "Opens the window to view resume",
       },
     },
     action: () => {
       echo("opening resume in another window");
       window.open("./assets/images/resume.pdf", "_blank");
     },
-    help: "Opens my resume, downloads if used with --download arg",
+    help: "Opens my resume",
   },
-  whoami: { action: () => echo("Gaurab"), help: "Prints my name" },
+  whoami: {
+    args: { i: { action: echoIP, help: "Prints the Ip address" } },
+    action: () => echo("Gaurab"),
+    help: "Prints my name",
+  },
   ip: { action: () => echoIP(), help: "Prints IP address" },
   cd: {
     action: () => echo("Cannot change the directory"),
@@ -126,13 +150,25 @@ const com = {
     },
     help: "Exits the terminal",
   },
-  help:{
-    action:()=>{
-      echo(`Commands available ${commands.join(' ')}`)
-    },help:"Displays the help"
-  }
+  help: {
+    action: () => {
+      echo(`Commands available <strong>${commands.join(" ")}</strong>`);
+    },
+    help: "Displays the help",
+  },
 };
 
 commands.forEach((element) => {
-  com.man.args[element] = () => echo(com[element].help);
+  let helptext = "";
+  helptext = helptext + com[element]["help"];
+  helptext = helptext + "<br>";
+  if (com[element]["args"]) {
+    Object.keys(com[element]["args"]).forEach((e) => {
+      helptext =
+        helptext +
+        `<strong> --${e} </strong>: ${com[element]["args"][e]["help"]}`;
+    });
+  }
+  com.man.args[element] = { action: () => echo(`${helptext} `) };
+  //com.man.args[element].action = () => echo(`${com[element].help} <br>${helptext} `);
 });

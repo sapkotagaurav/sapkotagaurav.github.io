@@ -123,7 +123,7 @@ document.getElementById('resume-icon').onclick = function(){
         alt : <a href="test.pdf">test.pdf</a>
     </object>
 </div>`
-    new WinBox("Blog",{
+    new WinBox("Resume",{
         html:html
     })
 }
@@ -135,6 +135,17 @@ document.getElementById('help-icon').onclick = function(){
     })
 }
 
+document.getElementById('snake-icon').onclick = function(){
+  
+  new WinBox("Snake Game",{
+      url:"https://gaurabsapkota.com.np/snake",
+      height:655,
+      width:618,
+      x:280,
+      y:110,
+      scroll:false,
+  })
+}
 
 
 
@@ -152,7 +163,7 @@ let download= document.getElementById('download-a')
 function showCamera(){
 navigator.mediaDevices.getUserMedia({audio:false,video:true}).then((s)=>{
     new WinBox("Camera",{
-        mount : document.getElementById('camera-image'),
+        mount : document.getElementById('camera-image').cloneNode(true),
         onclose:()=>{
             stream.getTracks().forEach(track => track.stop())
         }
@@ -194,14 +205,6 @@ function showCalendar() {
   }
 }
 
-function snake() {
-  new WinBox("snake", {
-    url: "http://gaurabsapkota.com.np/snake/",
-    height: 650,
-    width: 650,
-    scroll: true,
-  });
-}
 var terminal;
 function openTerminal() {
   if (terminal == null) {
