@@ -240,8 +240,6 @@ function VScode() {
         //html:html
         url: "https://github1s.com/sapkotagaurav/sapkotagaurav.github.io",
       });
-    });
-  });
 }
 document.getElementById("code").onclick = () => VScode();
 
