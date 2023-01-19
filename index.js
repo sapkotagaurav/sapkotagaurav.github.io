@@ -235,7 +235,7 @@ document.querySelector("#terminal").onclick = openTerminal;
 
 function VScode() {
   var html = "loading";
-  fetch("https://github1s.com/sapkotagaurav/snake").then((res) => {
+  fetch("https://github1s.com/sapkotagaurav/sapkotagaurav.github.io").then((res) => {
     res.text().then((d) => {
       html = d;
       html = html
