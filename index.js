@@ -235,11 +235,19 @@ document.querySelector("#terminal").onclick = openTerminal;
 
 function VScode() {
   var html = "loading";
-
+  fetch("https://github1s.com/sapkotagaurav/snake").then((res) => {
+    res.text().then((d) => {
+      html = d;
+      html = html
+        .replaceAll("/static", "https://github1s.com/static")
+        .replaceAll("/manifest.json", "https://github1s.com/manifest.json");
+      console.log(html);
       new WinBox("VS CODE", {
         //html:html
         url: "https://github1s.com/sapkotagaurav/sapkotagaurav.github.io",
       });
+    });
+  });
 }
 document.getElementById("code").onclick = () => VScode();
 
