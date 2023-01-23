@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Athiti&display=swap');
 
 body {    
-    background:url(./assets/images/wallpaper/cat.jpg) no-repeat center center fixed;
+    background:url(../images/wallpaper/cat.jpg) no-repeat center center fixed;
     overflow: hidden;
     position: fixed; 
     margin: 0;
