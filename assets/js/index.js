@@ -1,4 +1,14 @@
 /*Get and set the battery level */
+
+
+document.body.onload =()=>{
+  if (localStorage.getItem('wallpaper') != null) {
+    document.body.style.backgroundImage = localStorage.getItem('wallpaper')
+    
+  }
+}
+
+
 function getBatteryLevel() {
   navigator
     .getBattery()
@@ -129,7 +139,8 @@ document.getElementById('resume-icon').onclick = function(){
 }
 
 document.getElementById('help-icon').onclick = function(){
-    var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. </div>`
+    var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. <br> <h3>Changelog 1</h3> <p> <ol><li>Added wallpaper command in terminal</li><li>Applied wallpaper remains even after reload</li><li>Added reboot & shutdown command in terminal</li></ol>`
+    html +=`<h3>TODO:</h3><ol><li>Add skill command</li></ol></div>`
     new WinBox("Help",{
         html:html
     })
@@ -213,8 +224,13 @@ function openTerminal() {
       mount: document.querySelector(".term"),
       height: 650,
       width: 650,
+      x:285,
+      y:110,
       background:'##333333',
       scroll: true,
+      oncreate:()=>{document.querySelector(".terminal").onclick =()=>{
+        document.querySelector('#userin').focus()
+      }},
       onclose: () => {
         clear()
         
@@ -235,18 +251,9 @@ document.querySelector("#terminal").onclick = openTerminal;
 
 function VScode() {
   var html = "loading";
-  fetch("https://github1s.com/sapkotagaurav/snake").then((res) => {
-    res.text().then((d) => {
-      html = d;
-      html = html
-        .replaceAll("/static", "https://github1s.com/static")
-        .replaceAll("/manifest.json", "https://github1s.com/manifest.json");
-      console.log(html);
-      new WinBox("VS CODE", {
-        //html:html
-        url: "https://github1s.com/sapkotagaurav/sapkotagaurav.github.io",
-      });
-    });
+  new WinBox("VS CODE", {
+    //html:html
+    url: "https://github1s.com/sapkotagaurav/sapkotagaurav.github.io",
   });
 }
 document.getElementById("code").onclick = () => VScode();

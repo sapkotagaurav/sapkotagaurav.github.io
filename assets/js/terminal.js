@@ -24,10 +24,13 @@ const commands = [
   "clear",
   "exit",
   "help",
-]; //,"pwd","blog","vs-code","snake","shutdown","reboot",,]
+  "wallpaper",
+  "shutdown",
+  "reboot"
+]; //"shutdown","reboot",,]
 
 function processEnter() {
-  lastcommand = userinCommand.value;
+  lastcommand = document.querySelector("#userin").value;
   var command = document.querySelector("#userin").value.split(" ");
   document.querySelector("#userin").setAttribute("id", "userin-old");
   document.querySelector("#userin-old").readOnly = true;
@@ -74,6 +77,57 @@ function clear() {
 function getArg(a) {
   arg = a.replaceAll("-", "");
   return arg;
+}
+function changeWallpaper(a){
+  switch (a) {
+    case "r":{
+      var papes =["cat.jpg","dortmund.jpg"]
+      var onePape = papes[Math.random()*papes.length|0]
+      console.log(onePape,document.body.style.backgroundImage)
+      document.body.style.backgroundImage =`url(assets/images/wallpaper/${onePape})`
+      echo("Wallpaper applied successfully")
+    }
+      
+      break;
+    case "cat":{
+      document.body.style.backgroundImage =`url(assets/images/wallpaper/cat.jpg)`
+      echo("Wallpaper applied successfully")
+    }
+    break;
+    case "dortmund":{
+      document.body.style.backgroundImage =`url(assets/images/wallpaper/dortmund.jpg)`
+      echo("Wallpaper applied successfully")
+    }break;
+    case "dog":{
+      document.body.style.backgroundImage =`url(assets/images/wallpaper/dog.jpg)`
+      echo("Wallpaper applied successfully")
+
+    }break;
+    case "url":
+    case "u":{
+      try {
+        if (lastcommand.split(" ")[2] != null) {
+          document.body.style.backgroundImage =`url('${lastcommand.split(" ")[2]}')`
+        echo("Applied wallpaper")
+        }else{
+          echo("No url given")
+          return;
+        }
+        
+      } catch (error) {
+        echo(error)
+        return;
+      }
+      
+    }break;
+  
+    default:{
+      echo("Command wallpaper does not support "+a)
+      return;
+    }
+      break;
+  }
+  localStorage.setItem('wallpaper',document.body.style.backgroundImage)
 }
 function saveFile(a) {
   saveAs(a, "resume.pdf");
@@ -156,6 +210,34 @@ const com = {
     },
     help: "Displays the help",
   },
+  wallpaper:{
+    action:()=>{
+      changeWallpaper("cat")
+
+    },
+    args:{ u :{help:"Sets the wallpaper given url", action:()=>changeWallpaper("u")},
+    cat:{help:"Sets the wallpaper of cat", action:()=>changeWallpaper("cat")},
+    dog:{help:"Sets the wallpaper of dog", action:()=>changeWallpaper("dog")},
+    dortmund:{help:"Sets the wallpaper of Dortmund", action:()=>changeWallpaper("dortmund")},
+    r:{help:"Sets the wallpaper randomly", action:()=>changeWallpaper("r")}
+
+    },
+    help:"Changes the wallpaper"
+  },
+  shutdown: {
+    action: () => {
+      echo("turning off")
+      turnoff();
+    },
+    help: "Shuts the system down",
+  },
+  reboot: {
+    action: () => {
+      echo(`rebooting`);
+      restart()
+    },
+    help: "restarts",
+  },
 };
 
 commands.forEach((element) => {
@@ -172,3 +254,4 @@ commands.forEach((element) => {
   com.man.args[element] = { action: () => echo(`${helptext} `) };
   //com.man.args[element].action = () => echo(`${com[element].help} <br>${helptext} `);
 });
+
