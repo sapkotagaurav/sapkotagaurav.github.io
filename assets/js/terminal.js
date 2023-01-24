@@ -3,14 +3,33 @@ document.querySelector("#prompt-div").innerHTML = ini;
 var userinCommand = document.querySelector("#userin");
 
 var lastcommand;
+var hist = [];
+var last_index=0
 
 const main = document.querySelector(".term");
 
 main.addEventListener("keypress", (e) => {
   if (e.key == "Enter") {
     processEnter();
+    last_index=0;
   }
+
 });
+main.addEventListener("keydown", (e) => {
+  if (e.key == "ArrowUp") {
+    if (history != null) {
+      if (last_index<=hist.length-1) {
+        document.querySelector("#userin").value = hist[hist.length-last_index-1]
+        last_index++
+      }
+      
+    }
+
+  }
+
+});
+
+
 
 const commands = [
   "man",
@@ -26,11 +45,13 @@ const commands = [
   "help",
   "wallpaper",
   "shutdown",
-  "reboot"
+  "reboot",
+  "history",
 ]; //"shutdown","reboot",,]
 
 function processEnter() {
   lastcommand = document.querySelector("#userin").value;
+  hist.push(lastcommand)
   var command = document.querySelector("#userin").value.split(" ");
   document.querySelector("#userin").setAttribute("id", "userin-old");
   document.querySelector("#userin-old").readOnly = true;
@@ -78,56 +99,56 @@ function getArg(a) {
   arg = a.replaceAll("-", "");
   return arg;
 }
-function changeWallpaper(a){
+function changeWallpaper(a) {
   switch (a) {
-    case "r":{
-      var papes =["cat.jpg","dortmund.jpg"]
-      var onePape = papes[Math.random()*papes.length|0]
-      console.log(onePape,document.body.style.backgroundImage)
-      document.body.style.backgroundImage =`url(assets/images/wallpaper/${onePape})`
+    case "r": {
+      var papes = ["cat.jpg", "dortmund.jpg"]
+      var onePape = papes[Math.random() * papes.length | 0]
+      console.log(onePape, document.body.style.backgroundImage)
+      document.body.style.backgroundImage = `url(assets/images/wallpaper/${onePape})`
       echo("Wallpaper applied successfully")
     }
-      
+
       break;
-    case "cat":{
-      document.body.style.backgroundImage =`url(assets/images/wallpaper/cat.jpg)`
+    case "cat": {
+      document.body.style.backgroundImage = `url(assets/images/wallpaper/cat.jpg)`
       echo("Wallpaper applied successfully")
     }
-    break;
-    case "dortmund":{
-      document.body.style.backgroundImage =`url(assets/images/wallpaper/dortmund.jpg)`
+      break;
+    case "dortmund": {
+      document.body.style.backgroundImage = `url(assets/images/wallpaper/dortmund.jpg)`
       echo("Wallpaper applied successfully")
-    }break;
-    case "dog":{
-      document.body.style.backgroundImage =`url(assets/images/wallpaper/dog.jpg)`
+    } break;
+    case "dog": {
+      document.body.style.backgroundImage = `url(assets/images/wallpaper/dog.jpg)`
       echo("Wallpaper applied successfully")
 
-    }break;
+    } break;
     case "url":
-    case "u":{
+    case "u": {
       try {
         if (lastcommand.split(" ")[2] != null) {
-          document.body.style.backgroundImage =`url('${lastcommand.split(" ")[2]}')`
-        echo("Applied wallpaper")
-        }else{
+          document.body.style.backgroundImage = `url('${lastcommand.split(" ")[2]}')`
+          echo("Applied wallpaper")
+        } else {
           echo("No url given")
           return;
         }
-        
+
       } catch (error) {
         echo(error)
         return;
       }
-      
-    }break;
-  
-    default:{
-      echo("Command wallpaper does not support "+a)
+
+    } break;
+
+    default: {
+      echo("Command wallpaper does not support " + a)
       return;
     }
       break;
   }
-  localStorage.setItem('wallpaper',document.body.style.backgroundImage)
+  localStorage.setItem('wallpaper', document.body.style.backgroundImage)
 }
 function saveFile(a) {
   saveAs(a, "resume.pdf");
@@ -210,19 +231,20 @@ const com = {
     },
     help: "Displays the help",
   },
-  wallpaper:{
-    action:()=>{
+  wallpaper: {
+    action: () => {
       changeWallpaper("cat")
 
     },
-    args:{ u :{help:"Sets the wallpaper given url", action:()=>changeWallpaper("u")},
-    cat:{help:"Sets the wallpaper of cat", action:()=>changeWallpaper("cat")},
-    dog:{help:"Sets the wallpaper of dog", action:()=>changeWallpaper("dog")},
-    dortmund:{help:"Sets the wallpaper of Dortmund", action:()=>changeWallpaper("dortmund")},
-    r:{help:"Sets the wallpaper randomly", action:()=>changeWallpaper("r")}
+    args: {
+      u: { help: "Sets the wallpaper given url", action: () => changeWallpaper("u") },
+      cat: { help: "Sets the wallpaper of cat", action: () => changeWallpaper("cat") },
+      dog: { help: "Sets the wallpaper of dog", action: () => changeWallpaper("dog") },
+      dortmund: { help: "Sets the wallpaper of Dortmund", action: () => changeWallpaper("dortmund") },
+      r: { help: "Sets the wallpaper randomly", action: () => changeWallpaper("r") }
 
     },
-    help:"Changes the wallpaper"
+    help: "Changes the wallpaper"
   },
   shutdown: {
     action: () => {
@@ -238,6 +260,13 @@ const com = {
     },
     help: "restarts",
   },
+  history: {
+    action: () => {
+      echo(hist.join("<br>"));
+
+    },
+    help: "Shows the commands entered",
+  }
 };
 
 commands.forEach((element) => {
