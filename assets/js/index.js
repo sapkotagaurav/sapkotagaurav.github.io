@@ -129,7 +129,7 @@ document.getElementById('blog-icon').onclick= function (){
 }
 document.getElementById('resume-icon').onclick = function(){
     var html =`<div class="pdf">
-    <object id="pdf" data="./assets/images/Resume.pdf" type="application/pdf" width="600" height="700">
+    <object id="pdf" data="./assets/images/resume.pdf" type="application/pdf" width="600" height="700">
         alt : <a href="test.pdf">test.pdf</a>
     </object>
 </div>`
