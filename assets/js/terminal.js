@@ -4,25 +4,49 @@ var userinCommand = document.querySelector("#userin");
 
 var lastcommand;
 var hist = [];
-var last_index=0
+var last_index = 0
 
 const main = document.querySelector(".term");
 
 main.addEventListener("keypress", (e) => {
   if (e.key == "Enter") {
     processEnter();
-    last_index=0;
+    last_index = 0;
   }
 
 });
 main.addEventListener("keydown", (e) => {
   if (e.key == "ArrowUp") {
-    if (history != null) {
-      if (last_index<=hist.length-1) {
-        document.querySelector("#userin").value = hist[hist.length-last_index-1]
-        last_index++
+    if (hist != null) {
+      if (last_index <= hist.length - 1) {
+
+        if (hist[hist.length - last_index - 1]) {
+          document.querySelector("#userin").value = hist[hist.length - last_index - 1]
+        }
+         last_index++
+
       }
-      
+
+    }
+
+  }
+  if (e.key == "ArrowDown") {
+    if (hist != null) {
+      if (last_index >= 0) {
+        last_index--
+        if (hist[hist.length - last_index - 1]) {
+          document.querySelector("#userin").value = hist[hist.length - last_index - 1]
+        }
+
+
+
+
+      }
+      if (last_index < 0) {
+        document.querySelector("#userin").value = ""
+
+      }
+
     }
 
   }
@@ -47,7 +71,8 @@ const commands = [
   "shutdown",
   "reboot",
   "history",
-]; //"shutdown","reboot",,]
+  "social",
+]; 
 
 function processEnter() {
   lastcommand = document.querySelector("#userin").value;
@@ -162,6 +187,45 @@ function echoIP() {
   });
 }
 
+
+const social={
+
+  f:{ title:"Facebook", url:"https://www.facebook.com/365d736ad1b2e3ffcb411030c813e891/"},
+  t:{title:"Twitter",url:"https://twitter.com/pwdgau"},
+  i:{title:"Instagram",url:"https://www.instagram.com/gaurabisreviving/"},
+  l:{title:"LinkedIn",url:"https://www.linkedin.com/in/iamgvs/"},
+  g:{title:"Github", url:"https://github.com/sapkotagaurav/"},
+  le:{title:"Leetcode", url:"https://leetcode.com/sapkotagaurav/"},
+  e:{title:"Email", url:"mailto:gaurab@gaurabsapkota.com.np"},
+  p:{title:"Telephone", url:"tel:+14176332389"}
+
+
+
+}
+let socialstring ="";
+Object.keys(social).forEach(key => {
+  socialstring += `<a id=social-a-${key} href="${social[key]['url']}"> ${social[key]['title']}</a>  `
+});
+
+
+
+
+function showSocial(a){
+  switch (a) {
+    case 'a':
+      echo(socialstring)
+
+  
+    default:{
+      if(social[a]){
+        echo(`opening ${social[a]['title']}`)
+        window.open(social[a]['url'],"_blank")
+      }
+    }
+      break;
+  }
+}
+
 const prompt = `${navigator.appCodeName}@${navigator.platform}:`;
 const com = {
   man: {
@@ -245,6 +309,21 @@ const com = {
 
     },
     help: "Changes the wallpaper"
+  },
+  social:{
+    action:()=>{
+      showSocial("a")
+    },
+    args:{
+      facebook :{help:"My Facebook Account", action:()=>showSocial('f')},
+      twitter :{help:"My Twitter", action:()=>showSocial('t')},
+      instagram :{help:"My Insta", action:()=>showSocial('i')},
+      github :{help:"My Github", action:()=>showSocial('g')},
+      leetcode :{help:"leetcode", action:()=>showSocial('l')},
+      email :{help:"email", action:()=>showSocial('e')},
+      phone:{help:"phone number", action:()=>showSocial('p')},
+    },
+    help:"Ways to reach me",
   },
   shutdown: {
     action: () => {
