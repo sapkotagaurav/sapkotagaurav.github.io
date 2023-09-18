@@ -7,6 +7,44 @@ document.body.onload =()=>{
     
   }
 }
+document.addEventListener("contextmenu", e=> e.preventDefault());
+document.addEventListener("keydown",e=>{
+  if(e.ctrlKey && e.altKey && e.key==='t'){
+    openTerminal()
+  }
+})
+document.body.addEventListener("mousedown",e=>{
+  if(e.target!=date && e.target!=calendar){
+    if (isShowncalendar) {
+      calendar.close()
+      isShowncalendar=false;
+    }
+  }
+  // if(e.target!=document.getElementById("info")){
+  //   if (infoBox) {
+  //     infoBox.close()
+      
+  //   }
+  // }
+  
+  
+})
+document.body.addEventListener("mousedown",e=>{
+  // if(e.target!=date && e.target!=calendar){
+  //   if (isShowncalendar) {
+  //     calendar.close()
+  //     isShowncalendar=false;
+  //   }
+  // }
+  if(!document.getElementById("infobox").contains(e.target)){
+    if (infoBox) {
+      infoBox.close()
+      
+    }
+  }
+  
+  
+})
 
 
 function getBatteryLevel() {
@@ -37,14 +75,21 @@ function getScreenshot() {
   div.id = "screenshot";
   var img = document.createElement("img");
   img.src = "#";
-  img.height = screen.height / 2;
-  img.width = screen.width / 2;
+  img.height = screen.height / 2.5;
+  img.width = screen.width / 2.5;
   var button = document.createElement("button");
   button.innerHTML = "Save";
+  button.classList.add("social-btn")
   div.append(img);
+  div.append(document.createElement('br'))
+  div.append("Some element may not appear on screenshot if they are iframes!!!")
+  div.append(document.createElement('br'))
   div.append(button);
+  
   html2canvas(document.body, {
     allowTaint: true,
+    width:screen.width-10,
+    height:screen.height-10,
     logging: true,
     profile: true,
     useCORS: true,
@@ -59,8 +104,8 @@ function getScreenshot() {
 
       new WinBox(filename, {
         mount: div,
-        height: screen.height / 2 + 50,
-        width: screen.width / 2 + 50,
+        height: screen.height / 2.5 + 100,
+        width: screen.width / 2.5 + 50,
       });
 
       //saveAs(blob,'s.png')
@@ -139,7 +184,7 @@ document.getElementById('resume-icon').onclick = function(){
 }
 
 document.getElementById('help-icon').onclick = function(){
-    var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. <br> <h3>Changelog 1</h3> <p> <ol><li>Added wallpaper command in terminal</li><li>Applied wallpaper remains even after reload</li><li>Added reboot & shutdown command in terminal</li></ol>`
+    var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. <br> <h3>Changelog 1</h3> <p> <ol><li>Added wallpaper command in terminal</li><li>Applied wallpaper remains even after reload</li><li>Added reboot & shutdown command in terminal</li><li>added social command</li><li>ctrl-alt-t opens terminal</li><li>used outlook calendar</li></ol>`
     html +=`<h3>TODO:</h3><ol><li>Add skill command</li></ol></div>`
     new WinBox("Help",{
         html:html
@@ -203,10 +248,8 @@ function showCalendar() {
     isShowncalendar = false;
   } else {
     calendar = new WinBox("Calendar", {
-      class: "no-full no-header no-resize",
-      html: '<div class="elfsight-app-b79cc259-62ad-46bf-85ba-e9cb8a751c25">Loading...</div>',
-      height: 650,
-      width: 650,
+      class: "no-full no-header ",
+     url:"https://outlook.office365.com/calendar/published/0920d46e59e34f639aa3a5faec772736@MissouriState.edu/d266f3f8567740e696b7176f213bba933974450283162147387/calendar.html",
       x: 605,
       y: 36,
     })
@@ -267,6 +310,7 @@ function showInfo() {
       class: "no-full no-header no-resize",
       mount: document.getElementById("info"),
       width: 500,
+      id:'infobox',
       x: "75%",
       y: 36,
       onclose: function () {

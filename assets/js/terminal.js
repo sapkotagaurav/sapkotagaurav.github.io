@@ -195,16 +195,16 @@ const social={
   i:{title:"Instagram",url:"https://www.instagram.com/gaurabisreviving/"},
   l:{title:"LinkedIn",url:"https://www.linkedin.com/in/iamgvs/"},
   g:{title:"Github", url:"https://github.com/sapkotagaurav/"},
-  le:{title:"Leetcode", url:"https://leetcode.com/sapkotagaurav/"},
-  e:{title:"Email", url:"mailto:gaurab@gaurabsapkota.com.np"},
-  p:{title:"Telephone", url:"tel:+14176332389"}
+  le:{title:" &lt;/&gt;Leetcode", url:"https://leetcode.com/sapkotagaurav/"},
+  e:{title:"📧Email", url:"mailto:gaurab@gaurabsapkota.com.np"},
+  p:{title:"📞Telephone", url:"tel:+14176332389"}
 
 
 
 }
 let socialstring ="";
 Object.keys(social).forEach(key => {
-  socialstring += `<a id=social-a-${key} href="${social[key]['url']}"> ${social[key]['title']}</a>  `
+  socialstring += `&nbsp;<a id=social-a-${key}  href="${social[key]['url']}"><button class="social-btn"><i class="fa-brands fa-${social[key]['title'].toLowerCase()}"> ${social[key]['title'].toLowerCase()}</i></button></a>  `
 });
 
 
