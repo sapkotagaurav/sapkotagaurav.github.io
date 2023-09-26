@@ -188,3 +188,54 @@ body {
 #help-icon{
     cursor: pointer;
 }
+.cal-today{
+    border: #2980b9;
+    border-radius: 3px;
+    background-color: #a1bed1;
+}
+.last-month{
+    color:rgb(17, 95, 95);
+}
+.next-month{
+    color:darkcyan;
+}
+.this-month{
+    font-weight: bold;
+}
+
+tr td:first-child{
+    background-color: rgba(156, 68, 68, 0.664);
+}
+tr td:last-child{
+    background-color: rgba(156, 68, 68, 0.664);
+}
+#cal-month-year{
+    border: #1d0e0e;
+    display:inline-block;
+    align-self: center;
+    text-align: center;
+}
+#calendar{
+    display: inline-block;
+    border-style:solid;
+    
+}
+.cal-title{
+    display: inline-block;
+    align-self: center;
+    text-align: center;
+    align-items: center;
+    
+}
+.cal-btn{
+    background-color:transparent;
+	border: none;
+	display:inline-block;
+	cursor:pointer;
+	color:black;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
