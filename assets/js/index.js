@@ -176,6 +176,7 @@ document.getElementById('resume-icon').onclick = function(){
 document.getElementById('help-icon').onclick = function(){
     var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. <br> <h3>Changelog 1</h3> <p> <ol><li>Added wallpaper command in terminal</li><li>Applied wallpaper remains even after reload</li><li>Added reboot & shutdown command in terminal</li><li>added social command</li><li>alt-r opens terminal</li><li><strong>made own calendar</strong></li></ol>`
     html +=`<h3>TODO:</h3><ol><li>Add skill command</li></ol></div>`
+    html +=`<h3>Change Log</h3> <ol><li>Added <code>projects</code> Command</li></ol>`
     new WinBox("Help",{
         html:html
     })

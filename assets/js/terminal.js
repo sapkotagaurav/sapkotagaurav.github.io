@@ -72,6 +72,7 @@ const commands = [
   "reboot",
   "history",
   "social",
+  "projects"
 ]; 
 
 function processEnter() {
@@ -226,6 +227,19 @@ function showSocial(a){
   }
 }
 
+var projects =
+`<h3 style="line-height: 1;">&nbsp;&nbsp;&nbsp; <strong>Name - Tech Stack -&nbsp;Github - Preview </strong>&nbsp;&nbsp;</h3>
+<ul>
+<li style="line-height: 1;">&nbsp; Blogging App.- Python/Django/Postgresql - <a title="django-blog" href="https://github.com/sapkotagaurav/django-blog" target="_blank" rel="noopener">django-blog</a> - <a href="https://blog.gaurabsapkota.com.np" target="_blank" rel="noopener">Preview</a> &nbsp;&nbsp;</li>
+<li style="line-height: 1;">&nbsp; Portfolio - HTML/JS - <a title="Portfolio" href="https://github.com/sapkotagaurav/sapkotagaurav.github.io" target="_blank" rel="noopener">Portfolio</a> - <a title="Preview" href="https://gaurabsapkota.com.np">&nbsp; Preview</a> &nbsp;&nbsp;</li>
+<li style="line-height: 1;">&nbsp; Brewr - ReactJS&nbsp; -&nbsp; &nbsp; <a href="https://github.com/sapkotagaurav/brewr/" aria-invalid="true">github/brewr</a>&nbsp; - <a title="Netlify" href="https://brewr-react.netlify.com" target="_blank" rel="noopener">Preview</a> &nbsp;&nbsp;</li>
+<li style="line-height: 1;">&nbsp; ICPC&nbsp; - C++/Python - <a href="https://github.com/sapkotagaurav/icpc" aria-invalid="true">github</a> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;</li>
+<li style="line-height: 1;">&nbsp;OnMemo&nbsp; - JS/Flutter/Firebase - <a href="https://github.com/sapkotagaurav/OnMemo">github&nbsp;</a></li>
+<li style="line-height: 1;">TextEditorFx - Java/JavaFX - <a href="https://github.com/sapkotagaurav/TextEditorFX">Github</a></li>
+<li style="line-height: 1;">CodeStar - Django/Rest/ ReactJs -<a href="https://github.com/sapkotagaurav/CodeStar" aria-invalid="true">Github</a> - Coming soon</li>
+</ul>
+`
+
 const prompt = `${navigator.appCodeName}@${navigator.platform}:`;
 const com = {
   man: {
@@ -345,6 +359,13 @@ const com = {
 
     },
     help: "Shows the commands entered",
+  },
+  projects:{
+    action:() =>{
+      echo(projects)
+
+    },
+    help:"List all the projects"
   }
 };
 
