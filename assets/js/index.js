@@ -322,9 +322,10 @@ let url = "https://ipapi.co/json/";
 fetch(url).then((data) => {
   data.json().then((res) => {
     document.getElementById("ip").innerHTML = res["ip"];
+    console.log(res);
     document.getElementById(
       "location"
-    ).innerHTML = `${res["city"]}, ${res["region"]}, ${res["postal"]}`;
+    ).innerHTML = `${res["city"] === "Folsom" ?"Springfield, Missouri, 65806":res["city"] +","+ res["region"]+","+ res["postal"]}`;
     document.getElementById("wifi").innerHTML = navigator.onLine
       ? "Connected"
       : "Disconnected";
