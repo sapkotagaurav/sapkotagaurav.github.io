@@ -77,7 +77,6 @@ const commands = [
 
 function processEnter() {
   lastcommand = document.querySelector("#userin").value;
-  hist.push(lastcommand)
   var command = document.querySelector("#userin").value.split(" ");
   document.querySelector("#userin").setAttribute("id", "userin-old");
   document.querySelector("#userin-old").readOnly = true;
@@ -94,6 +93,7 @@ function processEnter() {
 function handleCommand(command, arg) {
   try {
     if (commands.includes(command)) {
+      hist.push(command)
       if (arg) {
         var a = getArg(arg);
         if (com[command]["args"] && com[command]["args"][a]) {
@@ -104,7 +104,10 @@ function handleCommand(command, arg) {
       } else {
         com[command]["action"]();
       }
-    } else {
+    } else if(command ===""){
+      echo("");
+    }
+    else {
       echo("Command is not recognized");
     }
   } catch (error) {
