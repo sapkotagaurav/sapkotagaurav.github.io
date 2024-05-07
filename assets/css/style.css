@@ -80,6 +80,44 @@ body {
     height: 30px;
     width: 30px;
 }
+
+.icons * {
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: transform .2s;
+    height: 40px;
+    width: 40px;
+    
+}
+.icons {
+    padding: 10px; /* Adjust the padding as needed */
+    display: flex;
+    flex-direction: column; /* Display icons in a column */
+    margin-top: 20px;
+    position: relative;
+}
+
+
+.icon-binder {
+    display: inline-block; /* Ensure icons are displayed in a row */
+    text-align: center; /* Center icon and label */
+    padding-bottom: 70px;
+   
+}
+.icon-binder img{
+    height: 60px;
+    width: 60px;
+    
+   
+}
+
+
+.icon-label {
+    color: #ffffff;
+    margin-top: 1px; /* Adjust the spacing between icon and label */
+}
+
+
 .bottom-bar *:hover {
     transform: scale(1.5);
 }

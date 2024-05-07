@@ -159,7 +159,7 @@ function showAlert(title, msg, timed, callback) {
 ///////blog////////////
 document.getElementById('blog-icon').onclick= function (){
     new WinBox("Blog",{
-        url:"https://gaurab.codes/blogs/"
+        url:"https://blog.gaurabsapkota.com.np/blogs/"
     })
 }
 document.getElementById('resume-icon').onclick = function(){
