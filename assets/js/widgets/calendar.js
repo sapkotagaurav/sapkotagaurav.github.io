@@ -178,7 +178,6 @@ function populate(month,year){
         ttt=true;
 
     }
-    console.log(f_day);
     let start_prev_days = days_in_month(get_prev(month,year)[0],get_prev(month,year)[1]);
     for (let index = 1; index < f_day; index++) {
         let td = document.getElementById(`cal-d-${index}`)
@@ -210,7 +209,6 @@ function populate(month,year){
         td.innerText = int-dm-f_day+1;
         td.classList.add("next-month");
         td.classList.remove("this-month")
-        console.log(`cal-d-${f_day+int}`);
         
     }
 

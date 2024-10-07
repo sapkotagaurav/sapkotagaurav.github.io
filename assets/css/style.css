@@ -89,6 +89,7 @@ body {
     width: 40px;
     
 }
+
 .icons {
     padding: 10px; /* Adjust the padding as needed */
     display: flex;
@@ -104,6 +105,10 @@ body {
     padding-bottom: 70px;
    
 }
+.icon-binder:hover {
+    translate: 10px;
+}
+
 .icon-binder img{
     height: 60px;
     width: 60px;
@@ -276,4 +281,52 @@ tr td:last-child{
 	padding:16px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-container {
+    width: 60%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.big-image-container {
+    margin-bottom: 20px;
+}
+
+#big-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.thumbnail {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.thumbnail:hover {
+    transform: scale(1.1);
 }

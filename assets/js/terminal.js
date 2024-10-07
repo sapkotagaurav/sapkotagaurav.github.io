@@ -133,7 +133,6 @@ function changeWallpaper(a) {
     case "r": {
       var papes = ["cat.jpg", "dortmund.jpg"]
       var onePape = papes[Math.random() * papes.length | 0]
-      console.log(onePape, document.body.style.backgroundImage)
       document.body.style.backgroundImage = `url(assets/images/wallpaper/${onePape})`
       echo("Wallpaper applied successfully")
     }

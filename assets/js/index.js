@@ -175,8 +175,7 @@ document.getElementById('resume-icon').onclick = function(){
 
 document.getElementById('help-icon').onclick = function(){
     var html =`<div><p> You can explore with icons and terminal as of now. This project is built on pure vanilla JS and CSS. <br> <h3>Changelog 1</h3> <p> <ol><li>Added wallpaper command in terminal</li><li>Applied wallpaper remains even after reload</li><li>Added reboot & shutdown command in terminal</li><li>added social command</li><li>alt-r opens terminal</li><li><strong>made own calendar</strong></li></ol>`
-    html +=`<h3>TODO:</h3><ol><li>Add skill command</li> <li>  Add  <code>pictures</code> command </li></ol></div>`
-    html +=`<h3>Change Log</h3> <ol><li>Added <code>projects</code> Command</li> <li> Debugged the terminal.</li></ol>`
+    html +=`<h3>Change Log</h3> <ol><li>Added <code>projects</code> Command</li> <li> Debugged the terminal.</li> <li>Added gallery.</li> <li>added about me section</li></ol>`
     new WinBox("Help",{
         html:html
     })
@@ -195,8 +194,92 @@ document.getElementById('snake-icon').onclick = function(){
 }
 
 
+//////icons ondblclickclick
 
 
+const iconOnDblClick = (icon) =>{
+  switch (icon) {
+    case 'terminal-icon-wrapper': openTerminal();break;
+    case 'vscode-icon-wrapper':VScode();break;
+    case 'aboutme-icon-wrapper':aboutMe();break;
+    case "image-icon-wrapper":openGallery();break;
+      
+      
+  
+    default:
+      break;
+  }
+}
+
+//////about me////
+
+const aboutMe = () =>{
+  new WinBox("About Me",{
+    html:`<section id="aboutmewindow" style="padding:2px">
+    <h2>About Me</h2>
+    <p>
+        Hey there! I'm Gaurab Sapkota, born in the mountain region of Nepal (yes, right by those postcard-perfect views). 
+        I grew up in Baglung and Parbat, with the growing &quot;tech&quot; around my side of the world.
+    </p>
+    <p>
+        Fast forward to now: I’m a Computer Science major at Missouri State University, pulling off a CGPA of 3.96 (I’m honestly still trying to figure out how that happened). 
+        I’m also minoring in Mathematics because, well, why not add a bit more to the brain workout? Between assignments and late-night coding sessions, 
+        I’ve been learning how to calculate just how much coffee gets me through finals week.
+    </p>
+    <p>
+        Professionally, I’m gaining hands-on experience as a Software Developer at ResNet, where I’ve built web apps using Python, Django, and even dabbled in some front-end magic with React and VueJs. 
+        I also have a knack for breaking things (in a good way)—I’ve found security vulnerabilities on platforms like ESET and even Harvard’s website. 
+        Turns out, I enjoy poking at websites and discovering what makes them tick (or break).
+    </p>
+    <p>
+        Speaking of breaking (and building), I’m interning at Pile Dynamics in Ohio, where I’ve been knee-deep in Next.js and ASP.NET Web API. 
+        Let’s just say I’ve mastered the art of troubleshooting, Googling bugs, and pretending everything works perfectly on the first try. (Spoiler: It rarely does).
+    </p>
+    <p>
+        When I’m not trying to fix things I broke (or build new things), I’m the Competitive Programming Head at the ACM Chapter at Missouri State University. 
+        This means I spend my time helping others solve algorithm puzzles, coaching teams, and occasionally pretending I know all the answers. 
+        I also represented my team at ICPC Midwest 2022, where we survived (barely) but had fun anyway.
+    </p>
+    <p>
+        Outside of the code editor, I’m the Treasurer for the ACM Chapter, organizing workshops, and connecting students with industry recruiters. 
+        Basically, I’m your go-to guy for all things tech, coffee-fueled hacks, and the occasional mountain nostalgia.
+    </p>
+    <p>
+        If you’re interested in some of my projects (like the blogging app or my take on a notepad-style text editor), check them out on <a href="https://github.com/sapkotagaurav" target="_blank">GitHub</a>. 
+        I’m always up for talking tech, exploring new ideas, or reminiscing about the mountains I miss from Nepal.
+    </p>
+</section>
+
+`
+  })
+}
+
+////gallery///
+const openGallery = () =>{
+  new WinBox("Gallery",{html:`
+    <div class="gallery">
+    <div class="gallery-container">
+        <div class="big-image-container">
+            <img id="big-image" src="assets/images/gal/1.jpg" alt="Big Display Image">
+        </div>
+        <div class="thumbnail-container">
+            <img src="assets/images/gal/1.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeSrc('1.jpg')">
+            <img src="assets/images/gal/2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeSrc('2.jpg')">
+            <img src="assets/images/gal/3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeSrc('3.jpg')">
+            <img src="assets/images/gal/4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeSrc('4.jpg')">
+            <img src="assets/images/gal/5.jpg" alt="Thumbnail 4" class="thumbnail" onclick="changeSrc('5.jpg')">
+        </div>
+    </div>
+    </div>`
+  })
+}
+
+const changeSrc = (img) =>{
+  const src =`assets/images/gal/${img}`;
+  const bigImage = document.querySelector(`#big-image`)
+  bigImage.src=src;
+
+}
 
 ///////////////////////////////Camera////////////////////////
 var stream,image;
@@ -323,7 +406,6 @@ let url = "https://ipapi.co/json/";
 fetch(url).then((data) => {
   data.json().then((res) => {
     document.getElementById("ip").innerHTML = res["ip"];
-    console.log(res);
     document.getElementById(
       "location"
     ).innerHTML = `${res["city"] === "Folsom" ?"Springfield, Missouri, 65806":res["city"] +","+ res["region"]+","+ res["postal"]}`;
